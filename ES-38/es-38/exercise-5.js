@@ -22,7 +22,7 @@ class BankAccountVip extends BankAccount {
   
 constructor(initialAmount){
   super(initialAmount)
-    
+     
   }
 
 

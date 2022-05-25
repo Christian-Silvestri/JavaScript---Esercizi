@@ -1,5 +1,14 @@
 function uncompletedNotes(notes) {
-  // ...
+  
+ const uncomplete = [];
+ for(i = 0; i < notes.length; i++) {
+   for(n = 0; n < notes.length; n++) {
+     if(notes[i].todos[n].done === false) {
+       uncomplete.push(notes[i]);
+     }
+   }
+ }
+ return uncomplete;
 }
 
 const notes = [
