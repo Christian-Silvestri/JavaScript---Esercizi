@@ -1,5 +1,5 @@
-class BankAccount {
-  #amount = 0;
+class BankAccount { 
+  #amount = 0; 
 
   constructor(initialAmount) {
     this.#amount = initialAmount;
