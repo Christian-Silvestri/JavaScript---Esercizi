@@ -20,23 +20,24 @@ class BankAccount {
 
 class BankAccountVip extends BankAccount {
   
-constructor(initialAmount){
-  super(initialAmount)
-     
+  constructor(initialAmount) {
+    super();
+    this.amount = initialAmount;
   }
 
-
-deposit(amount){
-  if (amount >= 1000){
-    super.deposit(amount + ((amount / 100) * 3))
+  deposit(amount) {
+    this.amount += amount;
   }
-  else {
-    super.deposit(amount)
+
+  withdraw(amount) {
+    this.amount -= amount;
   }
-}
 
-
-
+  view() {
+    if (this.amount >= 1000) {
+      console.log(this.amount  + ((this.amount * 3) / 100));
+    }
+  }
 }
 
 
