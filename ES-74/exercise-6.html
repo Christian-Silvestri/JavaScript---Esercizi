@@ -1,0 +1,55 @@
+<html>
+
+<body>
+  <div id="container">
+    <h2>Person's Form</h2>
+    <form id="person-form">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>
+
+<script>
+  function initForm() {
+    var form = document.getElementById("person-form");
+    var firstName = document.createElement("input");
+    firstName.setAttribute("type", "text");
+    firstName.setAttribute("name", "firstName");
+    firstName.setAttribute("placeholder", "First Name");
+    form.appendChild(firstName);
+    var lastName = document.createElement("input");
+    lastName.setAttribute("type", "text");
+    lastName.setAttribute("name", "lastName");
+    lastName.setAttribute("placeholder", "Last Name");
+    form.appendChild(lastName);
+    var age = document.createElement("input");
+    age.setAttribute("type", "number");
+    age.setAttribute("name", "age");
+    age.setAttribute("placeholder", "Age");
+    form.appendChild(age);
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var firstName = document.getElementsByName("firstName")[0].value;
+      var lastName = document.getElementsByName("lastName")[0].value;
+      var age = document.getElementsByName("age")[0].value;
+      console.log(firstName, lastName, age);
+    });
+  }
+  initForm();
+
+
+  function submitPersonForm(event) {
+    event.preventDefault();
+    var form = document.getElementById("person-form");
+    var person = {};
+    var inputs = form.getElementsByTagName("input");
+    for (var i = 0; i < inputs.length; i++) {
+      person[inputs[i].name] = inputs[i].value;
+    }
+    console.log(person);
+  }
+  document.getElementById("person-form").addEventListener("submit", submitPersonForm);
+
+</script>
