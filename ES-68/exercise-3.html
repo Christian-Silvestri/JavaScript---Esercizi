@@ -1,0 +1,52 @@
+<html>
+  <body>
+    <div id="container">
+      <form>
+        <div>
+          <label>Title</label>
+          <input type="text" id="todo-title" />
+        </div>
+        <div>
+          <label>Completed</label>
+          <input type="checkbox" id="todo-completed" />
+        </div>
+
+        <button type="submit" id="submit-todo"></button>
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  /*Implementare il codice necessario per eseguire una richiesta HTTP che si occupa di creare un nuovo post. 
+  Per creare un nuovo post utilizzare il seguente url: https://jsonplaceholder.typicode.com/posts (metodo: POST). 
+  Il corpo della richiesta deve contenere un oggetto post con le seguenti informazioni: `title` e flag `completed`. 
+   I dati del post dovranno essere trasmessi in seguito alla compilazione di un form. */
+
+   const url = 'https://jsonplaceholder.typicode.com/posts';
+  const submitTodo = document.querySelector('#submit-todo');
+  const todoTitle = document.querySelector('#todo-title');
+  const todoCompleted = document.querySelector('#todo-completed');
+
+  submitTodo.addEventListener('click', () => {
+    const todo = {
+      title: todoTitle.value,
+      completed: todoCompleted.checked,
+    };
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(todo),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(() => {
+        console.log('Todo created!');
+      });
+  });
+
+
+  
+</script>
