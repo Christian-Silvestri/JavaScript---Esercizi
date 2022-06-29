@@ -12,44 +12,67 @@
 </html>
 
 <script>
-  function initForm() {
-    var form = document.getElementById("person-form");
-    var firstName = document.createElement("input");
-    firstName.setAttribute("type", "text");
-    firstName.setAttribute("name", "firstName");
-    firstName.setAttribute("placeholder", "First Name");
-    form.appendChild(firstName);
-    var lastName = document.createElement("input");
-    lastName.setAttribute("type", "text");
-    lastName.setAttribute("name", "lastName");
-    lastName.setAttribute("placeholder", "Last Name");
-    form.appendChild(lastName);
-    var age = document.createElement("input");
-    age.setAttribute("type", "number");
-    age.setAttribute("name", "age");
-    age.setAttribute("placeholder", "Age");
-    form.appendChild(age);
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      var firstName = document.getElementsByName("firstName")[0].value;
-      var lastName = document.getElementsByName("lastName")[0].value;
-      var age = document.getElementsByName("age")[0].value;
-      console.log(firstName, lastName, age);
-    });
+  // Code here
+  function generateLabel(textContent) {
+    const label = document.createElement("label");
+    label.textContent = textContent;
+    return label;
   }
-  initForm();
 
+  function generateInput(type, id, placeholder) {
+    const input = document.createElement("input");
+    input.type = type;
+    input.id = id;
+    input.className = "form-input";
+    input.placeholder = placeholder;
+    return input;
+  }
+
+  function generateFormInputField(type, id, labelText) {
+    const label = generateLabel(labelText);
+    const input = generateInput(type, id, labelText);
+    const container = document.createElement("div");
+    container.appendChild(label);
+    container.appendChild(input);
+    return container;
+  }
 
   function submitPersonForm(event) {
     event.preventDefault();
-    var form = document.getElementById("person-form");
-    var person = {};
-    var inputs = form.getElementsByTagName("input");
-    for (var i = 0; i < inputs.length; i++) {
-      person[inputs[i].name] = inputs[i].value;
-    }
+    const firstNameInput = document.getElementById("firstName");
+    const lastNameInput = document.getElementById("lastName");
+    const ageInput = document.getElementById("age");
+    const person = {
+      firstName: firstNameInput.value,
+      lastName: lastNameInput.value,
+      age: ageInput.value,
+    };
+
     console.log(person);
   }
-  document.getElementById("person-form").addEventListener("submit", submitPersonForm);
 
+  function initForm() {
+    const firstNameInput = generateFormInputField(
+      "type",
+      "firstName",
+      "First Name"
+    );
+
+    const lastNameInput = generateFormInputField(
+      "type",
+      "lastName",
+      "Last Name"
+    );
+
+    const ageInput = generateFormInputField("number", "age", "Age");
+
+    const form = document.getElementById("person-form");
+    form.prepend(ageInput);
+    form.prepend(lastNameInput);
+    form.prepend(firstNameInput);
+
+    form.addEventListener("submit", submitPersonForm);
+  }
+
+  window.addEventListener("DOMContentLoaded", initForm);
 </script>

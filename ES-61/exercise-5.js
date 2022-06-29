@@ -34,52 +34,32 @@ const jobs = [
   }
 ];
 
-/*Implementare le funzioni `fetchPersonById` e `fetchJobById`, le quali dato un id devono restituire rispettivamente:
-* La persona che ha come identificativo l'id passato come parametro
-* Il tipo di lavoro che ha come identificativo l'id passato come parametro
-
-La prima funzione (`fetchPersonById`) deve restituire una `Promise` con un delay di 1000 millesecondi (`setTimeout`)
-La prima funzione (`fetchJobById`) deve restituire una `Promise` con un delay di 500 millesecondi (`setTimeout`)
-
-Infine implementare il codice necessario che si occupa di stampare in console il risultato della **prima** `Promise` che viene risolta.
-N.B: esiste un metodo che, dato in input un array di `Promise`, attende fino a quando una delle `Promise` non viene risolta o rigettata.  */
-
-
 function fetchPersonById(id) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const person = persons.find(item => item.id === id);
-      
-      if (person) {
-        return resolve(person);
-      }
-
-      return reject(`Person with id: ${id} doesn't exist`);
-    }, 1000);
-  });
+      setTimeout(() => {
+          const personId = persons.find((person) => person.id === id)
+          if (personId) {
+             return resolve(personId) 
+          } 
+          return reject(`The person with id number ${id} does not exist`)
+      }, 1000);
+  })
 }
 
-
-function fetchJobById(id) {
+function fetchJobById(id)  {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const job = jobs.find(item => item.id === id);
-      
-      if (job) {
-        return resolve(job);
-      }
-
-      return reject(`Job with id: ${id} doesn't exist`);
-    }, 500);
-  });
+      setTimeout(() => {
+          const jobId = jobs.find((job) => job.id === id)
+          if (jobId) {
+             return resolve(jobId.jobTitle) 
+          } 
+          return reject(`The job with id number ${id} does not exist`)
+      }, 500);
+  })
 }
 
-
-Promise.all([fetchPersonById(1),fetchJobById(1)])
-.then(data => {
-  console.log(data[0]);
-  console.log(data[1]);
-}).catch(err => {
-  console.log(err);
-});
+Promise.any([
+  fetchPersonById(3), 
+  fetchJobById((1))
+]).then((id) => console.log(id)).catch((err) => console.error(err));
 
